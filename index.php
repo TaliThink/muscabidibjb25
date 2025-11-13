@@ -151,34 +151,55 @@
 
         // --- FUNGSI UNTUK MERENDER KANDIDAT ---
         // Sekarang menerima 'candidates' sebagai argumen
-        function renderCandidates(candidates) {
-            candidates.forEach(candidate => {
-                const candidateElement = document.createElement('div');
-                
-                // Radio button (disembunyikan)
-                const radioInput = document.createElement('input');
-                radioInput.type = 'radio';
-                radioInput.id = `candidate-${candidate.id}`;
-                radioInput.name = 'candidate';
-                radioInput.value = candidate.id;
-                radioInput.className = 'absolute opacity-0 w-0 h-0';
+        function function renderCandidates(candidates) {
+    candidates.forEach(candidate => {
+        const candidateElement = document.createElement('div');
+        
+        const radioInput = document.createElement('input');
+        radioInput.type = 'radio';
+        radioInput.id = `candidate-${candidate.id}`;
+        radioInput.name = 'candidate';
+        radioInput.value = candidate.id;
+        radioInput.className = 'absolute opacity-0 w-0 h-0';
 
-                // Label yang terlihat (kartu kandidat)
-                const label = document.createElement('label');
-                label.htmlFor = `candidate-${candidate.id}`;
-                label.className = 'flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition duration-200';
-                
-                label.innerHTML = `
-                    <img src="${candidate.photo}" alt="Foto ${candidate.name}" class="w-16 h-16 rounded-full object-cover mr-4 border border-gray-200">
-                    <div class="flex flex-col">
-                        <span class="text-xs font-bold text-blue-600">NOMOR URUT ${candidate.no_urut}</span>
-                        <span class="text-lg font-medium text-gray-800">${candidate.name}</span>
-                    </div>
-                    <span class="ml-auto w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center transition-all duration-200">
-                        <!-- Lingkaran dalam untuk radio yang dipilih -->
-                        <span class="w-3 h-3 bg-blue-600 rounded-full scale-0 transition-transform duration-200"></span>
-                    </span>
-                `;
+        const label = document.createElement('label');
+        label.htmlFor = `candidate-${candidate.id}`;
+        label.className = 'flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition duration-200';
+        
+        label.innerHTML = `
+            <img src="${candidate.photo}" alt="Foto ${candidate.name}" class="w-16 h-16 rounded-full object-cover mr-4 border border-gray-200">
+            <div class="flex flex-col">
+                <span class="text-xs font-bold text-blue-600">NOMOR URUT ${candidate.no_urut}</span>
+                <span class="text-lg font-medium text-gray-800">${candidate.name}</span>
+            </div>
+            <span class="ml-auto w-6 h-6 border-2 border-gray-400 rounded-full flex items-center justify-center transition-all duration-200">
+                <span class="w-3 h-3 bg-blue-600 rounded-full scale-0 transition-transform duration-200"></span>
+            </span>
+        `;
+
+        radioInput.addEventListener('change', () => {
+            // Reset semua label
+            document.querySelectorAll('input[name="candidate"] + label').forEach(lbl => {
+                lbl.classList.remove('border-blue-600', 'shadow-md');
+                lbl.querySelector('span:last-child').classList.remove('border-blue-600');
+                lbl.querySelector('span:last-child > span').classList.add('scale-0');
+            });
+            
+            // Terapkan style ke label yang dipilih
+            const checkedLabel = document.querySelector(`label[for="candidate-${candidate.id}"]`);
+            checkedLabel.classList.add('border-blue-600', 'shadow-md');
+            checkedLabel.querySelector('span:last-child').classList.add('border-blue-600');
+            checkedLabel.querySelector('span:last-child > span').classList.remove('scale-0');
+
+            voteError.classList.add('hidden');
+        });
+
+        // ✅ Input dan label sekarang jadi saudara kandung (sibling)
+        candidateElement.appendChild(radioInput);
+        candidateElement.appendChild(label);
+        candidateList.appendChild(candidateElement);
+    });
+}
 
                 // Update style saat radio dipilih
                 radioInput.addEventListener('change', () => {
@@ -371,4 +392,5 @@
 
     </script>
 </body>
+
 </html>
