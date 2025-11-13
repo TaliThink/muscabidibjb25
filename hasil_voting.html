@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil E-Voting Ketua IDI Banjarbaru</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Animasi untuk progress bar */
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Header -->
+        <header class="bg-white p-6 rounded-xl shadow-lg text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-600">Hasil Real-Time Perolehan Suara</h1>
+            <p class="text-xl text-gray-700">Pemilihan Ketua IDI Cabang Banjarbaru 2025-2028</p>
+            <p class="text-sm text-gray-500 mt-2">
+                Diperbarui otomatis setiap 10 detik. 
+                <span id="last-updated"></span>
+            </p>
+        </header>
+
+        <!-- Kartu Statistik Utama -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Total Pemilih -->
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
+                <div class="bg-blue-100 p-4 rounded-full">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-2.288M12 20H4a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v6m-6 4a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Total Hak Suara</p>
+                    <p id="total-pemilih" class="text-3xl font-bold text-gray-900">0</p>
+                </div>
+            </div>
+            
+            <!-- Suara Masuk -->
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
+                <div class="bg-green-100 p-4 rounded-full">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Total Suara Masuk</p>
+                    <p id="total-suara-masuk" class="text-3xl font-bold text-gray-900">0</p>
+                </div>
+            </div>
+
+            <!-- Partisipasi -->
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
+                <div class="bg-yellow-100 p-4 rounded-full">
+                    <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M100 0H0v100h100V0z" fill="none"/><path d="M7 16l-4-4m0 0l4-4m-4 4h18" fill="none" stroke-width="2" transform="translate(3 4)"/><path d="M12 20a8 8 0 110-16 8 8 0 010 16z" fill="none" stroke-width="2" transform="translate(0 0)"/><path d="M12 12a4 4 0 100-8 4 4 0 000 8z" fill="none" stroke-width="2" transform="translate(0 0)"/></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Partisipasi</p>
+                    <p id="persentase-masuk" class="text-3xl font-bold text-gray-900">0%</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Kontainer Hasil Per Kandidat -->
+        <div id="results-container" class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Perolehan Suara Kandidat</h2>
+            
+            <!-- Loading Spinner (tampil saat data dimuat) -->
+            <div id="loading-spinner" class="text-center py-10">
+                <svg class="w-12 h-12 text-blue-600 animate-spin mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p class="mt-4 text-gray-600">Memuat data perolehan suara...</p>
+            </div>
+
+            <!-- Data akan diisi oleh JavaScript di sini -->
+            <!-- Contoh Tampilan Bar:
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex items-center">
+                        <img src="https://placehold.co/400x400" class="w-12 h-12 rounded-full object-cover mr-4 border border-gray-200">
+                        <div>
+                            <span class="text-xs font-bold text-blue-600">NOMOR URUT 1</span>
+                            <p class="text-lg font-semibold text-gray-800">Nama Kandidat</p>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-bold text-blue-600">120 Suara</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden">
+                    <div class="progress-bar bg-blue-600 h-8 rounded-full text-white text-sm font-medium flex items-center justify-center" 
+                         style="width: 40%">
+                        <span>40.0%</span>
+                    </div>
+                </div>
+            </div>
+            -->
+            
+            <!-- Pesan Error -->
+            <p id="error-message" class="text-red-600 text-center hidden"></p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- KONFIGURASI ---
+        const API_URL = 'api_get_results.php';
+        const REFRESH_INTERVAL = 10000; // 10 detik
+
+        // --- ELEMEN DOM ---
+        const resultsContainer = document.getElementById('results-container');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const errorMessage = document.getElementById('error-message');
+        
+        const totalPemilihEl = document.getElementById('total-pemilih');
+        const totalSuaraMasukEl = document.getElementById('total-suara-masuk');
+        const persentaseMasukEl = document.getElementById('persentase-masuk');
+        const lastUpdatedEl = document.getElementById('last-updated');
+
+        /**
+         * Fungsi utama untuk mengambil dan menampilkan data hasil
+         */
+        async function fetchResults() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                // Sembunyikan spinner saat data pertama kali dimuat
+                loadingSpinner.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+
+                // 1. Update Kartu Statistik
+                const stats = data.statistik;
+                totalPemilihEl.textContent = stats.total_pemilih.toLocaleString('id-ID');
+                totalSuaraMasukEl.textContent = stats.total_suara_masuk.toLocaleString('id-ID');
+                persentaseMasukEl.textContent = `${stats.persentase_masuk}%`;
+
+                // 2. Render Hasil Kandidat
+                renderCandidateResults(data.perolehan_suara, stats.total_suara_masuk);
+                
+                // 3. Update Waktu
+                const now = new Date();
+                lastUpdatedEl.textContent = `(Terakhir diperbarui: ${now.toLocaleTimeString('id-ID')})`;
+
+            } catch (error) {
+                console.error('Error fetching results:', error);
+                loadingSpinner.classList.add('hidden');
+                errorMessage.textContent = 'Gagal memuat data hasil. Server mungkin sedang bermasalah.';
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Fungsi untuk me-render bar perolehan suara
+         */
+        function renderCandidateResults(perolehanSuara, totalSuaraMasuk) {
+            // Hapus hasil lama (jaga-jaga jika ada, tapi kita jaga spinner)
+            resultsContainer.innerHTML = ''; 
+            
+            // Tambahkan judul kembali
+            const title = document.createElement('h2');
+            title.className = 'text-2xl font-semibold text-gray-800 mb-6';
+            title.textContent = 'Perolehan Suara Kandidat';
+            resultsContainer.appendChild(title);
+
+            if (perolehanSuara.length === 0) {
+                resultsContainer.innerHTML += '<p class="text-gray-600 text-center">Belum ada data kandidat.</p>';
+                return;
+            }
+
+            perolehanSuara.forEach(kandidat => {
+                const jumlahSuara = parseInt(kandidat.jumlah_suara, 10);
+                
+                // Hitung persentase dari total suara yang masuk
+                const persentase = (totalSuaraMasuk > 0) ? (jumlahSuara / totalSuaraMasuk) * 100 : 0;
+                
+                const barElement = document.createElement('div');
+                barElement.className = 'mb-6';
+                
+                barElement.innerHTML = `
+                    <div class="flex justify-between items-center mb-2 flex-wrap">
+                        <div class="flex items-center mb-2 sm:mb-0">
+                            <img src="${kandidat.foto_url}" alt="Foto ${kandidat.nama_kandidat}" 
+                                 class="w-12 h-12 rounded-full object-cover mr-4 border border-gray-200"
+                                 onerror="this.src='https://placehold.co/100x100/e2e8f0/333?text=Foto';">
+                            <div>
+                                <span class="text-xs font-bold text-blue-600">NOMOR URUT ${kandidat.no_urut}</span>
+                                <p class="text-lg font-semibold text-gray-800">${kandidat.nama_kandidat}</p>
+                            </div>
+                        </div>
+                        <span class="text-2xl font-bold text-blue-600">${jumlahSuara.toLocaleString('id-ID')} Suara</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden">
+                        <div class="progress-bar bg-blue-600 h-8 rounded-full text-white text-sm font-medium flex items-center justify-center" 
+                             style="width: ${persentase.toFixed(2)}%">
+                            <span class="px-2">${persentase.toFixed(1)}%</span>
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(barElement);
+            });
+        }
+
+        // --- INISIALISASI ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ambil data pertama kali saat halaman dimuat
+            fetchResults();
+            
+            // Atur interval untuk refresh data
+            setInterval(fetchResults, REFRESH_INTERVAL);
+        });
+
+    </script>
+</body>
+</html>
