@@ -199,8 +199,8 @@
                 });
 
                 candidateElement.appendChild(radioInput);
-                candidateList.appendChild(label);
-                candidateList.appendChild(candidateElement);
+                candidateElement.appendChild(label);
+                candidateList.appendChild(candidateElement);;
             });
         }
 
@@ -371,4 +371,5 @@
 
     </script>
 </body>
+
 </html>
