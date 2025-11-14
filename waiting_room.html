@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Pemilihan Ketua IDI</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+      /* Menerapkan font Inter sebagai default */
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      /* Menambahkan transisi untuk perubahan warna yang mulus */
+      #timer-box {
+        transition: all 0.5s ease-in-out;
+      }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Kontainer Utama -->
+    <div class="flex items-center justify-center min-h-screen p-4">
+
+        <!-- Kotak Pengumuman -->
+        <div class="w-full max-w-2xl p-8 text-center bg-white rounded-xl shadow-2xl">
+            
+            <!-- Ikon (Sebagai penanda visual) -->
+            <!-- <div class="flex justify-center mb-6">
+                <svg class="w-16 h-16 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.017.017-.032.034-.046.052M9 16.5v.01c0 .22.18.4.4.4.11 0 .21-.04.28-.11.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4-.11 0-.21.04-.28.11-.07.07-.11.17-.11.28Zm.879-1.31c.07.07.17.11.28.11s.21-.04.28-.11c.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4s-.4.18-.4.4v.01c0 .11.04.21.11.28m-.256-.911a.4.4 0 0 0-.56 0c-.07.07-.11.17-.11.28v.01c0 .22.18.4.4.4.11 0 .21-.04.28-.11.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4a.4.4 0 0 0-.28.11M17.25 9v.01c0 .22.18.4.4.4.11 0 .21-.04.28-.11.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4s-.4.18-.4.4v.01c0 .11.04.21.11.28m-.879-1.31a.4.4 0 0 0-.56 0c-.07.07-.11.17-.11.28v.01c0 .22.18.4.4.4s.4-.18.4-.4v-.01c0-.11-.04-.21-.11-.28m.256.911a.4.4 0 0 0-.56 0c-.07.07-.11.17-.11.28v.01c0 .22.18.4.4.4.11 0 .21-.04.28-.11.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4a.4.4 0 0 0-.28.11M14.25 9v.01c0 .22.18.4.4.4.11 0 .21-.04.28-.11.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4s-.4.18-.4.4v.01c0 .11.04.21.11.28m-.879-1.31a.4.4 0 0 0-.56 0c-.07.07-.11.17-.11.28v.01c0 .22.18.4.4.4s.4-.18.4-.4v-.01c0-.11-.04-.21-.11-.28m.256.911a.4.4 0 0 0-.56 0c-.07.07-.11.17-.11.28v.01c0 .22.18.4.4.4.11 0 .21-.04.28-.11.07-.07.11-.17.11-.28v-.01c0-.22-.18-.4-.4-.4a.4.4 0 0 0-.28.11M12 1.5c-5.386 0-9.75 4.364-9.75 9.75s4.364 9.75 9.75 9.75 9.75-4.364 9.75-9.75S17.386 1.5 12 1.5Z" />
+                </svg>
+            </div> -->
+
+
+            <!-- Logo IDI -->
+             <div class="flex justify-center mb-6">
+                <img src="path/idi.jpeg" alt="Logo IDI" class="h-20 w-auto"> 
+                <!-- Ganti "path/ke/logo-idi.png" dengan lokasi file logo Anda --><!-- Sesuaikan juga nilai h-20 (tinggi) dan w-auto (lebar otomatis) jika diperlukan -->
+            </div>
+
+            <!-- Judul Pengumuman -->
+            <h1 class="text-3xl font-extrabold text-gray-800">
+                PENGUMUMAN PENTING
+            </h1>
+            <p class="mt-2 text-lg text-gray-600">Panitia Pemilihan Ketua IDI</p>
+
+            <!-- Garis Pemisah -->
+            <hr class="w-32 mx-auto my-6 border-gray-300">
+
+            <!-- Isi Pengumuman -->
+            <p class="text-xl font-semibold text-gray-700">
+                PEMILIHAN KETUA IDI MASA BAKTI 2025-2028
+            </p>
+            <p class="mt-4 text-lg text-gray-600">
+                Akan dilaksanakan pada:
+            </p>
+            <!-- TANGGAL DITAMBAHKAN -->
+            <p class="text-2xl font-bold text-gray-800 mt-2">
+                Sabtu, 15 November 2025
+            </p>
+
+            <!-- Waktu (Dibuat menonjol) - DIKONTROL OLEH JAVASCRIPT -->
+            <div id="timer-box" class="px-6 py-4 mx-auto my-6 bg-yellow-100 border-2 border-yellow-300 rounded-lg max-w-md">
+                <!-- Status (Akan diisi oleh JS) -->
+                <span id="timer-status" class="block text-xl font-semibold text-gray-700">
+                    Memuat...
+                </span>
+                <!-- Waktu (Akan diisi oleh JS) -->
+                <span id="timer-display" class="block text-4xl font-extrabold text-red-700">
+                    --:--:--
+                </span>
+                <!-- Zona Waktu (Akan diisi oleh JS) -->
+                <span id="timer-timezone" class="block mt-1 text-lg font-semibold text-gray-700">
+                    WITA (Waktu Indonesia Tengah)
+                </span>
+            </div>
+
+            <!-- Penutup -->
+            <p class="mt-8 text-md text-gray-500">
+                Mohon kepada seluruh anggota yang memiliki hak pilih untuk bersiap.
+                <br>
+                Pastikan koneksi internet Anda stabil.
+            </p>
+
+        </div>
+        
+    </div>
+
+    <!-- Footer Sederhana -->
+    <footer class="absolute bottom-4 left-0 right-0 p-4 text-center">
+        <p class="text-sm text-gray-500">
+            &copy; 2025 Panitia Pemilihan IDI
+        </p>
+    </footer>
+
+    <!-- Script untuk Countdown -->
+    <script>
+        // --- ATUR WAKTU TARGET (WITA = UTC+8) ---
+        // Format ISO 8601 'YYYY-MM-DDTHH:mm:ss+08:00' memastikan zona waktu WITA
+        // (Tanggal pemilihan adalah 15 November 2025)
+        // JIKA TANGGALNYA BERBEDA, GANTI '2025-11-15' DI BAWAH INI
+        
+        // Ganti tanggal di bawah ini jika diperlukan
+        const TANGGAL_PEMILIHAN = '2025-11-15'; 
+        
+        const electionStart = new Date(`${TANGGAL_PEMILIHAN}T14:00:00+08:00`);
+        const electionEnd = new Date(`${TANGGAL_PEMILIHAN}T14:30:00+08:00`);
+
+        // Ambil elemen DOM
+        const timerBox = document.getElementById('timer-box');
+        const timerStatus = document.getElementById('timer-status');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerZone = document.getElementById('timer-timezone');
+
+        // Fungsi untuk format '00'
+        function formatTwoDigits(num) {
+            return num.toString().padStart(2, '0');
+        }
+
+        function updateCountdown() {
+            // Selalu ambil waktu terkini
+            const now = new Date();
+
+            // --- STATE 1: SEBELUM PEMILIHAN (now < electionStart) ---
+            if (now < electionStart) {
+                const diff = electionStart.getTime() - now.getTime();
+                
+                // Jika selisih negatif (sudah lewat), jangan tampilkan
+                if (diff <= 0) return; 
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                timerStatus.innerText = "Akan dibuka dalam:";
+                timerDisplay.innerText = `${formatTwoDigits(hours)}:${formatTwoDigits(minutes)}:${formatTwoDigits(seconds)}`;
+                timerZone.innerText = "WITA (Waktu Indonesia Tengah)";
+                
+                // Style: Kuning (Peringatan)
+                timerBox.className = "px-6 py-4 mx-auto my-6 bg-yellow-100 border-2 border-yellow-300 rounded-lg max-w-md";
+                timerDisplay.className = "block text-4xl font-extrabold text-red-700";
+            } 
+            
+            // --- STATE 2: SAAT PEMILIHAN BERLANGSUNG (now >= electionStart AND now < electionEnd) ---
+            else if (now >= electionStart && now < electionEnd) {
+                const diff = electionEnd.getTime() - now.getTime();
+
+                // Jika selisih negatif (sudah lewat), jangan tampilkan
+                if (diff <= 0) return;
+
+                const minutes = Math.floor(diff / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                timerStatus.innerText = "PEMILIHAN BERLANGSUNG";
+                timerDisplay.innerText = `Akan ditutup: ${formatTwoDigits(minutes)}:${formatTwoDigits(seconds)}`;
+                timerZone.innerText = "Segera gunakan hak pilih Anda!";
+
+                // Style: Hijau (Aktif)
+                timerBox.className = "px-6 py-4 mx-auto my-6 bg-green-100 border-2 border-green-300 rounded-lg max-w-md";
+                timerDisplay.className = "block text-4xl font-extrabold text-green-700";
+            } 
+            
+            // --- STATE 3: SETELAH PEMILIHAN (now >= electionEnd) ---
+            else {
+                timerStatus.innerText = "PEMILIHAN KETUA IDI";
+                timerDisplay.innerText = "TELAH DITUTUP";
+                timerZone.innerText = "Terima kasih atas partisipasi Anda.";
+
+                // Style: Abu-abu (Selesai)
+                timerBox.className = "px-6 py-4 mx-auto my-6 bg-gray-100 border-2 border-gray-300 rounded-lg max-w-md";
+                timerDisplay.className = "block text-4xl font-extrabold text-gray-700";
+
+                // Hentikan interval karena sudah tidak relevan
+                clearInterval(countdownInterval);
+            }
+        }
+
+        // Jalankan fungsi pertama kali saat halaman dimuat
+        updateCountdown();
+
+        // Set interval untuk mengupdate hitung mundur setiap detik
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
