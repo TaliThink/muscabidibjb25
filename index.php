@@ -78,9 +78,9 @@
                 <!-- Pesan Error Pilihan -->
                 <p id="vote-error" class="text-red-600 text-sm mt-4 hidden">Anda harus memilih salah satu kandidat.</p>
 
-                <button id="submit-vote-button"
+                <button id=
                         class="w-full bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out mt-8">
-                    Kirim Pilihan Saya
+                    Maaf Ditutup
                 </button>
             </div>
 
@@ -372,3 +372,4 @@
     </script>
 </body>
 </html>
+
