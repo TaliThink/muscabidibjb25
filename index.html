@@ -110,8 +110,8 @@
         // Ganti tanggal di bawah ini jika diperlukan
         const TANGGAL_PEMILIHAN = '2025-11-15'; 
         
-        const electionStart = new Date(`${TANGGAL_PEMILIHAN}T14:00:00+08:00`);
-        const electionEnd = new Date(`${TANGGAL_PEMILIHAN}T14:45:00+08:00`);
+        const electionStart = new Date(`${TANGGAL_PEMILIHAN}T14:15:00+08:00`);
+        const electionEnd = new Date(`${TANGGAL_PEMILIHAN}T15:00:00+08:00`);
 
         // Ambil elemen DOM
         const timerBox = document.getElementById('timer-box');
@@ -141,7 +141,7 @@
 
                 timerStatus.innerText = "Akan dibuka dalam:";
                 timerDisplay.innerText = `${formatTwoDigits(hours)}:${formatTwoDigits(minutes)}:${formatTwoDigits(seconds)}`;
-                timerZone.innerText = "14.30 - 14.55 WITA MOHON MAAF VOTING DITUNDA KARENA MENYESUAIKAN JADWAL VOTING OFFLINE";
+                timerZone.innerText = "14.15 - 15.00 WITA MOHON MAAF VOTING DITUNDA KARENA MENYESUAIKAN JADWAL VOTING OFFLINE";
                 
                 // Style: Kuning (Peringatan)
                 timerBox.className = "px-6 py-4 mx-auto my-6 bg-yellow-100 border-2 border-yellow-300 rounded-lg max-w-md";
@@ -192,6 +192,7 @@
 </body>
 
 </html>
+
 
 
 
